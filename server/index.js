@@ -15,6 +15,5 @@ app.get('/reviews', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  console.log('inside meta server route');
   db.getMetaReview(req, res);
 });

@@ -6,12 +6,12 @@ CREATE DATABASE ratings;
 DROP SCHEMA IF EXISTS ratingsdata;
 CREATE SCHEMA ratingsdata;
 
--- DROP TABLE IF EXISTS review CASCADE;
+DROP TABLE IF EXISTS review CASCADE;
 CREATE TABLE review (
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   rating INT NOT NULL,
-  review_date_unix BIGINT NOT NULL,
+  review_date BIGINT NOT NULL,
   summary TEXT NOT NULL,
   body TEXT NOT NULL,
   recommend BOOLEAN NOT NULL,
@@ -20,17 +20,16 @@ CREATE TABLE review (
   reviewer_email TEXT NOT NULL,
   response TEXT NOT NULL,
   helpfulness INT NOT NULL
-  review_date DATE NOT NULL
 );
 
--- DROP TABLE IF EXISTS characteristic CASCADE;
+DROP TABLE IF EXISTS characteristic CASCADE;
 CREATE TABLE characteristic (
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   name TEXT NOT NULL
 );
 
--- DROP TABLE IF EXISTS characteristic_reviews CASCADE;
+DROP TABLE IF EXISTS characteristic_reviews CASCADE;
 CREATE TABLE characteristic_reviews (
   id SERIAL PRIMARY KEY,
   characteristic_id INT references characteristic(id),
@@ -38,7 +37,7 @@ CREATE TABLE characteristic_reviews (
   char_value INT NOT NULL
 );
 
--- DROP TABLE IF EXISTS review_photos CASCADE;
+DROP TABLE IF EXISTS review_photos CASCADE;
 CREATE TABLE review_photos (
   id SERIAL PRIMARY KEY,
   review_id INT references review(id),
@@ -67,5 +66,13 @@ FROM '/Users/andyluu/Desktop/AtelierSDC/reviews_photos.csv'
 DELIMITER ','
 CSV HEADER;
 
+-- CREATE INDEX idx_reviews_id ON review (id);
+-- CREATE INDEX idx_review_pid ON review (product_id);
+-- CREATE INDEX idx_characteristic_id ON characteristic (id);
+-- CREATE INDEX idx_characteristic_reviews_id ON characteristic_reviews (id);
+-- CREATE INDEX idx_characteristic_reviews_pid ON characteristic_reviews (characteristic_id);
+-- CREATE INDEX idx_characteristic_reviews_rid ON characteristic_reviews (review_id);
+-- CREATE INDEX idx_review_photos_id ON review_photos (id);
+-- CREATE INDEX idx_review_photos_id ON review_photos (review_id);
 
 

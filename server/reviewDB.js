@@ -12,20 +12,18 @@ const db = new Client({
 db.connect();
 
 const getAllReviews = (req, res) => {
-  const queryString = `SELECT * FROM get_review_data(${req.query.product_id}, ${req.query.count}, ${req.query.page}) `;
+  const queryString = `SELECT * FROM get_review_data(${req.query.product_id}, ${req.query.count || 5}, ${req.query.page || 1}) `;
   db.query(queryString).then((result) => {
     res.status(200);
     res.send(result.rows);
-  }).catch(() => {
+  }).catch((err) => {
     res.status(500);
-    res.send('Error: invalid product_id provided: ');
+    res.send(err);
   });
 };
 
 const getMetaReview = (req, res) => {
-  console.log('inside getMetaReview');
-  console.log(req.query);
-  let queryString = `SELECT * FROM get_meta_data(${req.query.product_id})`;
+  const queryString = `SELECT * FROM get_meta_data(${req.query.product_id})`;
   db.query(queryString).then((result) => {
     res.status(200);
     res.send(result.rows);
