@@ -1,4 +1,4 @@
-# Project Atlier : Backend System
+# Gambit Outlet : Backend System
 This project is an API infrastructure service for the ratings and reviews module of a retail e-commerce application.
 ## Technologies Used
 Node | Express | PostgreSQL | AWS EC2 | NGINX
